@@ -55,7 +55,7 @@ exports.updateUser = async (req, res, next) => {
 
 exports.signout = async (req, res) => {
   try {
-    res.cookie("token", null).status(200).json({
+    res.cookie("token", "").status(200).json({
       success: true,
       message: "Successfully sign out!",
     });

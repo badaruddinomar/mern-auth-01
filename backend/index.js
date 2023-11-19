@@ -7,11 +7,12 @@ const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const errorMiddleware = require("./utils/error");
 const { frontendUrl } = require("./helper");
+const cors = require("cors");
 const path = require("path");
 dotenv.config();
 
 const app = express();
-
+app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 app.use(
@@ -19,12 +20,7 @@ app.use(
     extended: true,
   })
 );
-const __variableOfChoice = path.resolve();
-app.use(express.static(path.join(__variableOfChoice, "/frontend/dist")));
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__variableOfChoice, "frontend", "dist", "index.html"));
-});
 // handling uncaught exceptions--
 process.on("uncaughtException", (err) => {
   console.log(`error: ${err.message}`);
@@ -44,10 +40,16 @@ mongoose
   .catch((err) => {
     console.log(err.message);
   });
-
 // routes starts--
 app.use("/api/v1", userRoutes);
 app.use("/api/v1", authRoutes);
+// static file handling--
+const __variableOfChoice = path.resolve();
+app.use(express.static(path.join(__variableOfChoice, "/frontend/dist")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__variableOfChoice, "frontend", "dist", "index.html"));
+});
 
 // Error Handler--
 app.use((err, req, res, next) => {
