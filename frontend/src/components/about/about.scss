@@ -1,0 +1,20 @@
+@import "../../styles/mixin.scss";
+@import "../../styles/variables.scss";
+
+.about-page {
+  padding: 5rem 2rem;
+  @include flex-col;
+
+  h1 {
+    font-size: 3rem;
+    font-family: $font-secondary;
+    text-align: center;
+  }
+  p {
+    font-size: 1.6rem;
+    margin: 2rem 0;
+    font-family: $font-primary;
+    max-width: 800px;
+    line-height: 1.6;
+  }
+}

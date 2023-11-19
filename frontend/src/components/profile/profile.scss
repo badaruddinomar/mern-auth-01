@@ -1,0 +1,15 @@
+@import "../../styles/variables.scss";
+@import "../../styles/mixin.scss";
+
+.profile-page {
+  width: 100%;
+  padding-top: 100px;
+  padding: 2rem;
+  @include flex-col;
+
+  h1 {
+    font-size: 3rem;
+    font-family: $font-primary;
+    margin-bottom: 2rem;
+  }
+}

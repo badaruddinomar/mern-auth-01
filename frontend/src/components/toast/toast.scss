@@ -1,0 +1,35 @@
+@import "../../styles/variables.scss";
+@import "../../styles/mixin.scss";
+
+.toast {
+  position: fixed;
+  top: 100px;
+  right: 0;
+  padding: 1.5rem 2rem;
+  background: aliceblue;
+  min-width: 270px;
+  transition: all 0.23s;
+  transform: translateX(100%);
+
+  p {
+    font-family: $font-primary;
+    font-size: 1.7rem;
+    text-transform: lowercase;
+    letter-spacing: 0.4px;
+  }
+  &.success {
+    transition: all 0.23s;
+    transform: translateX(0);
+
+    p {
+      color: #00f700;
+    }
+  }
+  &.error {
+    transition: all 0.23s;
+    transform: translateX(0);
+    p {
+      color: tomato;
+    }
+  }
+}

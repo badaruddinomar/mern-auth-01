@@ -1,0 +1,52 @@
+@import "../../styles/variables.scss";
+@import "../../styles/mixin.scss";
+
+.login-page {
+  width: 100%;
+  padding-top: 100px;
+  @include flex-col;
+
+  h1 {
+    font-size: 3rem;
+    font-family: $font-secondary;
+    margin-bottom: 2rem;
+  }
+  .have-account {
+    width: 400px;
+    @include flex-between;
+
+    p,
+    .link {
+      font-size: 1.7rem;
+      font-family: $font-primary;
+      margin: 0.5rem 0;
+      transition: all 0.23s;
+    }
+
+    .link {
+      border-bottom: 1px solid gray;
+      padding-bottom: 0.3rem;
+      &:hover {
+        opacity: 0.4;
+      }
+    }
+    @media (max-width: 450px) {
+      width: 100%;
+    }
+  }
+  .forgot-password-link {
+    justify-self: start;
+    align-self: flex-start;
+    font-size: 1.6rem;
+    font-family: $font-primary;
+    cursor: pointer;
+    transition: all 0.23s;
+    border-bottom: 1px solid black;
+    padding-bottom: 0.5rem;
+    margin-top: 1rem;
+
+    &:hover {
+      opacity: 0.6;
+    }
+  }
+}

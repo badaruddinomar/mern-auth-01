@@ -1,0 +1,58 @@
+@import "../../../styles/variables.scss";
+@import "../../../styles/mixin.scss";
+.update-profile-form {
+  @include flex-col;
+  .image-div {
+    position: relative;
+    @include flex-col;
+
+    img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 1rem;
+      cursor: pointer;
+      transition: all 0.23s;
+    }
+    .file-input {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      cursor: pointer;
+      position: absolute;
+      top: 35.3%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+    }
+    p {
+      font-size: 1.5rem;
+      font-family: $font-primary;
+      text-transform: capitalize;
+      text-align: center;
+    }
+    .image-progress,
+    .image-uploaded {
+      color: green;
+    }
+    .image-error {
+      color: red;
+    }
+    .camera-icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: all 0.5s;
+      font-size: 2rem;
+    }
+    &:hover .camera-icon {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}

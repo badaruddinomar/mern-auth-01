@@ -1,0 +1,26 @@
+@mixin flex-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@mixin flex-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+@mixin mediaPhone {
+  @media (max-width: 768px) {
+    @content;
+  }
+}

@@ -1,0 +1,81 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&family=Roboto:ital,wght@0,400;0,700;1,400&display=swap");
+@import "./styles/variables.scss";
+@import "./styles/mixin.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+html {
+  font-size: 10px;
+}
+body {
+  width: 100vw;
+  overflow-x: hidden;
+  position: relative;
+}
+form {
+  @include flex-col;
+
+  .input-div {
+    position: relative;
+    width: 400px;
+    height: 40px;
+    background: aliceblue;
+    margin: 1rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 0.4rem;
+    padding: 0 1rem;
+
+    input {
+      border: none;
+      outline: none;
+      min-width: 90%;
+      height: 100%;
+      background: aliceblue;
+      font-size: 1.7rem;
+      font-family: $font-primary;
+      flex: 1;
+    }
+    .eye-open,
+    .eye-close {
+      font-size: 2rem;
+      margin: 0 0.5rem;
+      cursor: pointer;
+      transition: all 0.23s;
+    }
+    @media (max-width: 450px) {
+      width: 100%;
+    }
+  }
+  button {
+    width: 400px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    font-size: 1.7rem;
+    padding: 1rem 2rem;
+    margin: 0.5rem 0;
+    color: white;
+    font-family: $font-primary;
+    border-radius: 4px;
+    background: $bg-primary;
+    transition: all 0.23s;
+    &:hover {
+      opacity: 0.7;
+    }
+    @media (max-width: 450px) {
+      width: 100%;
+    }
+  }
+}
