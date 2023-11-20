@@ -23,12 +23,14 @@ const UpdateProfile = () => {
     (state) => state.userReducer
   );
 
-  const [username, setUsername] = useState(currentUser?.username);
-  const [email, setEmail] = useState(currentUser?.email);
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [file, setFile] = useState(undefined);
   const [imageProgress, setImageProgress] = useState(null);
   const [imageError, setImageError] = useState(null);
   const [imageDownloadUrl, setImageDownloadUrl] = useState(null);
+  const [avatar, setAvatar] = useState(null);
+  const [userData, setUserdata] = useState(null);
   const dispatch = useDispatch();
 
   const usernameChangeHandler = (e) => {
@@ -40,6 +42,15 @@ const UpdateProfile = () => {
 
   const fileChangeHandler = (e) => {
     setFile(e.target.files[0]);
+
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setAvatar(reader.result);
+      }
+    };
+    reader.readAsDataURL(e.target.files[0]);
   };
 
   const handleUpload = async (file) => {
@@ -69,26 +80,37 @@ const UpdateProfile = () => {
     }
   }, [file]);
 
+  useEffect(() => {
+    const fetchHandler = async () => {
+      const response = await fetch(`/api/v1/profile`);
+      const data = await response.json();
+      setUserdata(data.data);
+      setUsername(data.data.username);
+      setEmail(data.data.email);
+      if (response.ok) {
+        dispatch(updateSuccess(data.data));
+      }
+    };
+    fetchHandler();
+  }, [dispatch]);
+
   const updateHandler = async (e) => {
     try {
       e.preventDefault();
       dispatch(updateStart());
-      const response = await fetch(
-        `/api/v1/updateProfile/${currentUser._id}`,
-        {
-          method: "PATCH",
-          body: JSON.stringify({
-            username,
-            email,
-            profilePicture: imageDownloadUrl
-              ? imageDownloadUrl
-              : currentUser.profilePicture,
-          }),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await fetch(`/api/v1/updateProfile/${currentUser._id}`, {
+        method: "PATCH",
+        body: JSON.stringify({
+          username,
+          email,
+          profilePicture: imageDownloadUrl
+            ? imageDownloadUrl
+            : currentUser.profilePicture,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       const data = await response.json();
       if (response.ok) {
         dispatch(updateSuccess(data.userData));
@@ -119,10 +141,13 @@ const UpdateProfile = () => {
             accept="image/*"
             onChange={fileChangeHandler}
           />
-          <img src={currentUser?.profilePicture} alt="profile-picture" />
+          <img
+            src={avatar ? avatar : userData?.profilePicture}
+            alt="profile-picture"
+          />
           <CameraAltIcon className="camera-icon" />
           {imageProgress > 0 && imageProgress < 100 && (
-            <p className="image-progress">Image uploading {imageProgress}</p>
+            <p className="image-progress">Image uploading {imageProgress}%</p>
           )}
           {imageProgress == 100 && (
             <p className="image-uploaded">Image uploaded successfully</p>
