@@ -16,6 +16,10 @@
     font-size: 1.7rem;
     text-transform: lowercase;
     letter-spacing: 0.4px;
+
+    @include mediaPhone {
+      font-size: 1.4rem;
+    }
   }
   &.success {
     transition: all 0.23s;

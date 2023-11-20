@@ -31,6 +31,10 @@
       font-family: $font-primary;
       text-transform: capitalize;
       text-align: center;
+
+      @include mediaPhone {
+        font-size: 1.4rem;
+      }
     }
     .image-progress,
     .image-uploaded {

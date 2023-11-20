@@ -15,5 +15,9 @@
     font-family: $font-primary;
     max-width: 800px;
     line-height: 1.6;
+
+    @include mediaPhone {
+      font-size: 1.4rem;
+    }
   }
 }

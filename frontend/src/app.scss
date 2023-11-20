@@ -46,6 +46,10 @@ form {
       font-size: 1.7rem;
       font-family: $font-primary;
       flex: 1;
+
+      @include mediaPhone {
+        font-size: 1.4rem;
+      }
     }
     .eye-open,
     .eye-close {
