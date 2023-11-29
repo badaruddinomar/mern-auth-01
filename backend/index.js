@@ -6,12 +6,23 @@ const authRoutes = require("./routes/authRoute");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const errorMiddleware = require("./utils/error");
+const compression = require("compression");
+const helmet = require("helmet");
 const { frontendUrl } = require("./helper");
 const cors = require("cors");
 const path = require("path");
 dotenv.config();
 
 const app = express();
+// Enable gzip compression
+app.use(compression());
+// Use helmet middleware to set expires headers
+app.use(
+  helmet({
+    contentSecurityPolicy: false, // Disable this if you're not using CSP
+  })
+);
+
 app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
